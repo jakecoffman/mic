@@ -9,18 +9,24 @@
 		}
 	};
 
-	navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(handleSuccess);
+	function getMedia() {
+		navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+			.then(handleSuccess)
+			.catch(e => console.error('failed to get user media', e))
+	}
 </script>
 
 <main>
 	<h1>Mic permission test</h1>
 
-	<p>This page should immediately request microphone access.</p>
+	<button on:click={getMedia}>Get Media</button>
+
+	<p>Press the button to request media access</p>
 
 	<h2>Recorder/Uploader</h2>
 	<input type="file" accept="audio/*" capture>
 
-	<h2>Player (todo)</h2>
+	<h2>Player</h2>
 	<audio id="player" controls></audio>
 </main>
 
